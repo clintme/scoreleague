@@ -5,9 +5,13 @@ import { call, put, take } from 'redux-saga/effects';
 import { duckSuccess, duckFailed } from 'ducks';
 
 import * as userAPI from 'helpers/API/user';
+import * as teamAPI from 'helpers/API/team';
 
+// function loginAPI(params) {
+//   return userAPI.login(params)
+// }
 function loginAPI(params) {
-  return userAPI.login(params)
+  return teamAPI.registration(params)
 }
 
 export function* login(params) {

@@ -1,13 +1,50 @@
 package models
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // Teams ....
 type Teams struct {
 	ID        int64      `json:"id" gorm:"AUTO_INCREMENT"`
 	Name      string     `json:"name,omitempty"`
-	Status    string     `json:"status,omitempty"`
+	Status    int64      `json:"status,omitempty" sql:"default:0"`
 	CreatedAt time.Time  `json:"created_at,omitempty"`
 	UpdatedAt time.Time  `json:"updated_at,omitempty"`
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+}
+
+// TeamTable ...
+type TeamTable struct{}
+
+// Create ...
+func (team *Teams) Create() (Teams, error) {
+	if team.ID == 0 {
+		var err error
+
+		teamData := TeamTable{}
+		teams, err := teamData.GetTeamByName(team.Name)
+		if err == nil && teams.ID > 0 {
+			return *team, errors.New("Team name is already exist")
+		}
+
+		err = db.Create(team).Error
+		if err != nil {
+			team.ID = 0
+		}
+
+		return *team, err
+	}
+
+	return *team, nil
+}
+
+// GetTeamByName ...
+func (repo *TeamTable) GetTeamByName(name string) (Teams, error) {
+	var teams Teams
+
+	err := db.Debug().Where("name = ?", name).Limit(1).First(&teams).Error
+
+	return teams, err
 }
