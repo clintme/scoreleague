@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-// import { reducer as toastr } from 'react-redux-toastr';
 // import { reducer as form } from 'redux-form';
 
-import auth from './auth';
+import auth from 'reducers/auth';
+import team from 'reducers/team';
 
 const rootReducer = combineReducers({
   auth,
+  team,
   routing,
-  // toastr,
   // form,
 });
 

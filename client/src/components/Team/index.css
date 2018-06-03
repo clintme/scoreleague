@@ -1,11 +1,13 @@
-.login {
-  max-width: 300px;
+.team-registration {
+  max-width: 500px;
   margin: 50px auto;
 }
 
-.login-form-forgot {
-  float: right;
-}
-.login-form-button {
-  width: 100%;
+.align-right {
+  font-size: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  margin-left: 48px;
+  padding: 0;
+  list-style: none;
 }

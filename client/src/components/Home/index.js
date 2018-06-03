@@ -1,7 +1,9 @@
 import React from 'react';
-// import logo from './logo.svg';
+import { Route } from 'react-router-dom';
 
-import './index.css';
+// import logo from './logo.svg';
+import TeamReg from 'components/Team';
+import 'components/Home/index.css';
 
 const Home = () => (
   <div className="App">

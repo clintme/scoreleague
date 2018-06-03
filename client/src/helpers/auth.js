@@ -1,5 +1,4 @@
 import jwtDecode from 'jwt-decode';
-import { toastr } from 'react-redux-toastr';
 
 const LOGIN_KEY = process.env.REACT_APP_PROJECT_ID;
 
@@ -12,7 +11,7 @@ function isTokenValid(token) {
       return true;
     }
 
-    toastr.danger('Auth Error!', 'Expired token');
+    // toastr.danger('Auth Error!', 'Expired token');
     return false;
   } catch (e) {
     return false;
