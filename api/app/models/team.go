@@ -9,6 +9,7 @@ import (
 type Teams struct {
 	ID        int64      `json:"id" gorm:"AUTO_INCREMENT"`
 	Name      string     `json:"name,omitempty"`
+	Payment   int64      `json:"payment,omitempty"`
 	Status    int64      `json:"status,omitempty" sql:"default:0"`
 	CreatedAt time.Time  `json:"created_at,omitempty"`
 	UpdatedAt time.Time  `json:"updated_at,omitempty"`
@@ -45,6 +46,16 @@ func (repo *TeamTable) GetTeamByName(name string) (Teams, error) {
 	var teams Teams
 
 	err := db.Debug().Where("name = ?", name).Limit(1).First(&teams).Error
+
+	return teams, err
+}
+
+// GetTeams ...
+func GetTeams() ([]Teams, error) {
+	var teams []Teams
+	var err error
+
+	err = db.Debug().Model(&Teams{}).Scan(&teams).Error
 
 	return teams, err
 }
