@@ -7,8 +7,18 @@ import (
 
 // GetTeam ...
 func GetTeam(c *gin.Context) {
+	var team models.Teams
+	var teams []models.Teams
+	var err error
 
-	teams, err := models.GetTeams()
+	teamErr := c.BindJSON(&team)
+
+	if teamErr == nil {
+		teams, err = models.GetTeams(team.ID)
+	} else {
+		teams, err = models.GetTeams(0)
+	}
+
 	if err != nil {
 		OutputJSON(c, "error", err.Error())
 		return

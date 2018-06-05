@@ -49,3 +49,14 @@ func (repo *PlayerTable) GetPlayerByName(name string) (Players, error) {
 
 	return players, err
 }
+
+// GetPlayers ...
+func GetPlayers() ([]Players, error) {
+	var players []Players
+	var err error
+
+	// err = db.Debug().Model(&Teams{}).Order("updated_at desc").Scan(&teams).Error
+	err = db.Debug().Model(&Players{}).Scan(&players).Error
+
+	return players, err
+}

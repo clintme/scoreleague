@@ -13,6 +13,8 @@ const TeamRegistration = (props) => {
   return (
   <div className="team-registration">
     <Modal
+      width="100%"
+      className="registration-modal"
       title="Team Registration"
       visible={props.state.visible}
       onOk={props.handleOk}

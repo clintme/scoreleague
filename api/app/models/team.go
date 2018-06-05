@@ -51,11 +51,15 @@ func (repo *TeamTable) GetTeamByName(name string) (Teams, error) {
 }
 
 // GetTeams ...
-func GetTeams() ([]Teams, error) {
+func GetTeams(ID int64) ([]Teams, error) {
 	var teams []Teams
 	var err error
 
-	err = db.Debug().Model(&Teams{}).Scan(&teams).Error
+	if ID == 0 {
+		err = db.Debug().Model(&Teams{}).Scan(&teams).Error
+	} else {
+		err = db.Debug().Model(&Teams{}).Where("id=?", ID).Scan(&teams).Error
+	}
 
 	return teams, err
 }

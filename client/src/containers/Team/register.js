@@ -49,7 +49,6 @@ class TeamRegisterContainer extends Component {
   }
 
   render() {
-    const { visible, loading } = this.state;
     return (
       <div>
         <Button onClick={this.showModal}>Register</Button>

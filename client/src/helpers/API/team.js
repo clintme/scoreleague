@@ -17,8 +17,9 @@ export function registration({ Name, Payment }) {
  * @param {string} email - username of user
  * @param {string} password - password of user
  */
-export function registeredTeam() {
-  return apiUtil.fetchFromAPI({
+export function registeredTeam({ ID}) {
+  return apiUtil.postToAPI({
     endpoint: 'teams',
+    body: { ID: parseInt(ID, 10) },
   });
 }

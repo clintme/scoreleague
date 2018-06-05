@@ -53,7 +53,7 @@ func (u *User) Create() (User, error) {
 		userData := UserTable{}
 		user, err := userData.GetUserByEmail(u.Email)
 		if err == nil && user.ID > 0 {
-			return *u, errors.New("Email already exist.")
+			return *u, errors.New("Email already exist")
 		}
 
 		origPassword := u.Password
