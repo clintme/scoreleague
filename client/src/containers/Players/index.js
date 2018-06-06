@@ -17,7 +17,7 @@ class PlayersContainer extends Component {
       }
     } = this.props;
 
-    this.props.fetch();
+    this.props.fetch(teamID);
     this.props.fetchTeamInfo(teamID || 0);
   }
 
@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetch: params => dispatch(duckRequest('GET_PLAYERS_REQUEST', params)),
+  fetch: teamID => dispatch(duckRequest('GET_PLAYERS_REQUEST', teamID)),
   fetchTeamInfo: ID => dispatch(duckRequest('TEAM_INFO_REQUEST', { ID })),
 });
 

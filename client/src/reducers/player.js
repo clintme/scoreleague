@@ -19,12 +19,30 @@ const player = (state = initialState, action) => {
     case 'GET_PLAYERS_SUCCESS':
       state = state.merge({
         isFetching: false,
-        playersList: action.payload.data.players,
+        playersList: action.payload.players,
       });
       return state;
     case 'GET_PLAYERS_FAILED':
       state = state.merge({
         isFetching: false,
+      });
+      return state;
+    case 'PREG_REQUEST':
+      state = state.merge({
+        isCreating: true,
+      });
+      return state;
+    case 'PREG_SUCCESS':
+      state = state.merge({
+        isCreating: false,
+      });
+
+      state = addItemSelector(state, ['playersList'], action.payload.data);
+
+      return state;
+    case 'PREG_FAILED':
+      state = state.merge({
+        isCreating: false,
       });
       return state;
     default:

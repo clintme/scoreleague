@@ -30,7 +30,7 @@ func (player *Players) Create() (Players, error) {
 			return *player, errors.New("Player only allowed to play in one team")
 		}
 
-		err = db.Create(player).Error
+		err = db.Debug().Create(player).Error
 		if err != nil {
 			player.ID = 0
 		}
@@ -51,12 +51,12 @@ func (repo *PlayerTable) GetPlayerByName(name string) (Players, error) {
 }
 
 // GetPlayers ...
-func GetPlayers() ([]Players, error) {
+func GetPlayers(TeamID int64) ([]Players, error) {
 	var players []Players
 	var err error
 
 	// err = db.Debug().Model(&Teams{}).Order("updated_at desc").Scan(&teams).Error
-	err = db.Debug().Model(&Players{}).Scan(&players).Error
+	err = db.Debug().Model(&Players{}).Where("team_id=?", TeamID).Scan(&players).Error
 
 	return players, err
 }

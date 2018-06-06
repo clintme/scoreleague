@@ -3,27 +3,26 @@ import { message } from 'antd';
 import { push, go } from 'react-router-redux';
 import { call, put, take } from 'redux-saga/effects';
 import { duckSuccess, duckFailed } from 'ducks';
-import * as teamAPI from 'helpers/API/team';
 import * as playerAPI from 'helpers/API/player';
 
 export function* addPlayer(params) {
   try {
-    const res = yield teamAPI.registration(params);
-    
+    const res = yield playerAPI.addPlayer(params);
+    console.log(res)
     if (res.status === 'success') {
-      yield put(duckSuccess('TREG_SUCCESS', { ...res.data}));
+      yield put(duckSuccess('PREG_SUCCESS', { ...res.data}));
     } else {
       message.error(res.message);
-      yield put(duckFailed('TREG_FAILED', res.message));
+      yield put(duckFailed('PREG_FAILED', res.message));
     }
   } catch (error) {
     message.error(error.message);
-    yield put(duckFailed('TREG_FAILED', error));
+    yield put(duckFailed('PREG_FAILED', error));
   }
 }
 export function* addPlayerRequest() {
   while (true) {
-    const action = yield take('TREG_REQUEST');
+    const action = yield take('PREG_REQUEST');
 
     yield call(addPlayer, action.payload);
   }
@@ -31,8 +30,9 @@ export function* addPlayerRequest() {
 export function* getPlayers(params) {
   try {
     const res = yield playerAPI.registeredPlayers(params);
+
     if (res.status === 'success') {
-      yield put(duckSuccess('GET_PLAYERS_SUCCESS', res));
+      yield put(duckSuccess('GET_PLAYERS_SUCCESS', res.data));
     } else {
       message.error(res.message);
       yield put(duckFailed('GET_PLAYERS_FAILED', res.message));

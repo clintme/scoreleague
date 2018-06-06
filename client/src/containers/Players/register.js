@@ -30,14 +30,16 @@ class PlayersRegisterContainer extends Component {
   submitHandler = (e, form) => {
     e.preventDefault();
 
+    const { props: { isCreating, teamInfo } } = this;
     form.validateFields((err, params) => {
       if (!err) {
         const fields = {
           Name: params.Name,
-          Payment: parseInt(params.Payment, 10),
+          TeamID: teamInfo.get('id'),
         };
 
-        this.props.dispatch(duckRequest('TREG_REQUEST', fields))
+        console.log(fields)
+        this.props.dispatch(duckRequest('PREG_REQUEST', fields))
       }
     });
   }

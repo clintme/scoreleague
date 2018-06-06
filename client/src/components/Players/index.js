@@ -7,12 +7,11 @@ import './index.css';
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
 
-const PlayerList = (props) => {
-  const { form: { getFieldDecorator }, submitHandler, props: { playersList, isCreating, teamInfo } } = props;
-  console.log(teamInfo.size && teamInfo.toJSON())
+const PlayerList = (params) => {
+  const { form: { getFieldDecorator }, submitHandler, props: { playersList, isCreating, teamInfo } } = params;
   return (
   <div className="players-list">
-      <Tabs tabBarExtraContent={<RegisterButton isCreating={isCreating} />}>
+      <Tabs tabBarExtraContent={<RegisterButton {...params.props} />}>
         <TabPane tab={`Team ${teamInfo.get('name')} Players`} key="1">
           <List
             loading={false}
@@ -24,7 +23,7 @@ const PlayerList = (props) => {
                 <List.Item actions={[<a href={`/players/${item.id}`}>edit</a>]}>
                   <List.Item.Meta
                     title={item.name}
-                    description='sfdkjakfjkdlsja'
+                    description={`Registered: ${item.created_at}`}
                   />
                 </List.Item>
               )

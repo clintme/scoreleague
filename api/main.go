@@ -61,7 +61,7 @@ func initializeRoutes(origRouter *gin.Engine) {
 	api.POST("/login", controllers.Login)
 	api.POST("/teams", controllers.GetTeam)
 	api.POST("/teams/registration", controllers.TeamRegistration)
-	api.GET("/players", controllers.GetPlayers)
+	api.POST("/players", controllers.GetPlayers)
 	api.POST("/players/registration", controllers.PlayerRegistration)
 	api.POST("/signup", controllers.Signup)
 }

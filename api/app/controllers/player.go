@@ -7,8 +7,14 @@ import (
 
 // GetPlayers ...
 func GetPlayers(c *gin.Context) {
+	var player models.Players
+	playerErr := c.BindJSON(&player)
+	if playerErr != nil {
+		OutputJSON(c, "error", "Team is not specified")
+		return
+	}
 
-	players, err := models.GetPlayers()
+	players, err := models.GetPlayers(player.TeamID)
 	if err != nil {
 		OutputJSON(c, "error", err.Error())
 		return
@@ -33,5 +39,6 @@ func PlayerRegistration(c *gin.Context) {
 		return
 	}
 
-	OutputJSON(c, "success", "Player is successfully registered")
+	OutputDataJSON(c, "success", "Player is successfully registered", gin.H{"data": player})
+
 }
