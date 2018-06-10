@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Home from 'components/Home';
 // import Dashboard from 'components/Dashboard';
-import Team from 'containers/Team';
+import Team from 'containers/Teams';
 import Login from 'containers/Login';
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -25,20 +25,26 @@ const AppLayout = () => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} onClick={redirectPath}>
     <Menu.Item key="1">
       <Link to="/">
-        <Icon type="user" />
-        <span>Login</span>
+        <Icon type="home" />
+        <span>Home</span>
       </Link>
     </Menu.Item>
     <Menu.Item key="2">
       <Link to="/team">
-        <Icon type="video-camera" />
+        <Icon type="team" />
         <span>Team</span>
       </Link>
     </Menu.Item>
     <Menu.Item key="3">
       <Link to="/players">
-        <Icon type="upload" />
+        <Icon type="user" />
         <span>Players</span>
+      </Link>
+    </Menu.Item>
+    <Menu.Item key="4">
+      <Link to="/schedules">
+        <Icon type="calendar" />
+        <span>Schedules</span>
       </Link>
     </Menu.Item>
   </Menu>

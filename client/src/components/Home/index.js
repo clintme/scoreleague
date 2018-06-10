@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 // import logo from './logo.svg';
-import TeamReg from 'components/Team';
+import TeamReg from 'components/Teams';
 import 'components/Home/index.css';
 
 const Home = () => (

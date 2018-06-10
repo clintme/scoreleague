@@ -32,8 +32,8 @@ export function* createTeamSuccess() {
   while (true) {
     const action = yield take('TREG_SUCCESS');
     
-    yield put(push(`/team/${action.payload.data.id}/players`));
-    yield put(go(0));
+    // yield put(push(`/team/${action.payload.data.id}/players`));
+    // yield put(go(0));
 
     message.success('Team is successfully registered.');
   }

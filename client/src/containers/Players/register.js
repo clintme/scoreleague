@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { push } from 'react-router-redux';
-import { Route } from 'react-router'
-import { Redirect } from 'react-router-dom'
-import { Form, List, Tabs, Avatar, Icon, Input, Checkbox, Button } from 'antd';
+import { Badge, Button } from 'antd';
 
 
 import Players from 'components/Players';
@@ -30,7 +26,7 @@ class PlayersRegisterContainer extends Component {
   submitHandler = (e, form) => {
     e.preventDefault();
 
-    const { props: { isCreating, teamInfo } } = this;
+    const { props: { teamInfo } } = this;
     form.validateFields((err, params) => {
       if (!err) {
         const fields = {
@@ -38,7 +34,6 @@ class PlayersRegisterContainer extends Component {
           TeamID: teamInfo.get('id'),
         };
 
-        console.log(fields)
         this.props.dispatch(duckRequest('PREG_REQUEST', fields))
       }
     });
@@ -51,10 +46,14 @@ class PlayersRegisterContainer extends Component {
   }
 
   render() {
-    const { visible, loading } = this.state;
+    const { playersList } = this.props;
     return (
       <div>
-        <Button onClick={this.showModal}>Add Players</Button>
+        <Badge count={playersList.size} style={{ backgroundColor: '#52c41a' }} />
+        {
+          playersList.size < 10 ?
+          <Button onClick={this.showModal}>Add Players</Button> :
+          <Button onClick={this.showModal} disabled>Add Players</Button>}
         <RegisterPlayersModal {...this} />
       </div>
     )

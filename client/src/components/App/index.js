@@ -15,6 +15,7 @@ class AppLayout extends Component {
     });
   }
   render() {
+    console.log(this.props.path)
     return (
       <Layout style={{ height: "100vh" }}>
         <Sider

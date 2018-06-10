@@ -55,8 +55,10 @@ func GetPlayers(TeamID int64) ([]Players, error) {
 	var players []Players
 	var err error
 
-	// err = db.Debug().Model(&Teams{}).Order("updated_at desc").Scan(&teams).Error
-	err = db.Debug().Model(&Players{}).Where("team_id=?", TeamID).Scan(&players).Error
+	err = db.Debug().Model(&Players{}).Order("created_at desc").Scan(&players).Error
+	if TeamID > 0 {
+		err = db.Debug().Model(&Players{}).Where("team_id=?", TeamID).Scan(&players).Error
+	}
 
 	return players, err
 }

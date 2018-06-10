@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router'
-import { Redirect } from 'react-router-dom'
-import { Form, List, Tabs, Avatar, Icon, Input, Checkbox, Modal, Button } from 'antd';
 
 import Players from 'components/Players';
 import { duckRequest } from 'ducks';

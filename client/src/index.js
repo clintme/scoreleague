@@ -17,7 +17,7 @@ const history = configureStore().history;
 const docRoot = document.getElementById('root');
 const AppRoute = () => (
   <BrowserRouter>
-    <AppLayout>
+    <AppLayout history={history} store={store}>
       <Provider store={store}>
         <Routes history={history} />
       </Provider>

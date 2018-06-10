@@ -19,7 +19,7 @@ const AddPlayers = (params) => {
   return (
     <div className="player-registration">
       <Modal
-        width="100%"
+        // width="100%"
         className="registration-modal"
         title={`${teamInfo.get('name')} Team Players Registration`}
         visible={visible}

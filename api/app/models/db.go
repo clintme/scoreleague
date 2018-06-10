@@ -121,8 +121,8 @@ func MigrateTables() {
 	// Games table
 	db.AutoMigrate(&Games{})
 
-	// GameStats table
-	db.AutoMigrate(&GameStats{})
+	// Schedules table
+	db.AutoMigrate(&Schedules{})
 
 	// GameOfficials table
 	db.AutoMigrate(&GameOfficials{})

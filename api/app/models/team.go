@@ -7,13 +7,15 @@ import (
 
 // Teams ....
 type Teams struct {
-	ID        int64      `json:"id" gorm:"AUTO_INCREMENT"`
-	Name      string     `json:"name,omitempty"`
-	Payment   int64      `json:"payment,omitempty"`
-	Status    int64      `json:"status,omitempty" sql:"default:0"`
-	CreatedAt time.Time  `json:"created_at,omitempty"`
-	UpdatedAt time.Time  `json:"updated_at,omitempty"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	ID          int64      `json:"id" gorm:"AUTO_INCREMENT"`
+	Name        string     `json:"name,omitempty"`
+	Captain     string     `json:"captain,omitempty"`
+	Description string     `json:"description,omitempty"`
+	Payment     int64      `json:"payment,omitempty"`
+	Status      int64      `json:"status,omitempty" sql:"default:0"`
+	CreatedAt   time.Time  `json:"created_at,omitempty"`
+	UpdatedAt   time.Time  `json:"updated_at,omitempty"`
+	DeletedAt   *time.Time `json:"deleted_at,omitempty"`
 }
 
 // TeamTable ...
