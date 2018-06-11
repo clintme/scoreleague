@@ -1,5 +1,5 @@
-@import '~antd/dist/antd.css';
-@import 'custom.less';
+@import "~antd/dist/antd.css";
+@import "iconfont/iconfont.css";
 /* @import 'react-redux-toastr/src/styles/index'; */
 
 body {
