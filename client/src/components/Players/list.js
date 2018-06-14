@@ -1,8 +1,10 @@
 import React from 'react';
-import { List, Tabs, Form, Badge} from 'antd';
+import { Card, Col, Row, Tabs, Form, Badge, Icon, Avatar } from 'antd';
 import './index.css';
+import profile from 'media/id.png';
 
 const { TabPane } = Tabs;
+const { Meta } = Card;
 
 const PlayerList = (params) => {
   const { props: { playersList } } = params;
@@ -10,22 +12,25 @@ const PlayerList = (params) => {
     <div className="players-list">
       <Tabs tabBarExtraContent={<Badge count={playersList.size} />}>
         <TabPane tab='Registered Players' key="1">
-          <List
-            loading={false}
-            itemLayout="horizontal"
-            loadMore={false}
-            dataSource={playersList.size && playersList.sort((a, b) => a.get('id') < b.get('id')).toJSON()}
-            renderItem={
-              item => (
-                <List.Item actions={[<a href={`/players/${item.id}`}>edit</a>]}>
-                  <List.Item.Meta
-                    title={item.name}
-                    description={`Registered: ${item.created_at}`}
+          <Row gutter={24}>
+          {
+            playersList.map(item => (
+              <Col key={item.get('id')} span={6} style={{marginBottom: '20px'}}>
+                <Card
+                  style={{ width: 300 }}
+                  actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
+                >
+                  <Badge count={item.get('id')} className={`badge-${item.get('team_name').toLowerCase()}`}></Badge>
+                  <Meta
+                    avatar={<Avatar src={profile} />}
+                    title={item.get('name')}
+                    description={item.get('team_name')}
                   />
-                </List.Item>
-              )
-            }
-          />
+                </Card>
+              </Col>
+            ))
+          }
+          </Row>
         </TabPane>
       </Tabs>
     </div>

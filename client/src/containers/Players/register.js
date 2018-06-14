@@ -40,9 +40,9 @@ class PlayersRegisterContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      visible: nextProps.isCreating,
-    });
+    // this.setState({
+    //   visible: nextProps.isCreating,
+    // });
   }
 
   render() {

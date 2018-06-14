@@ -1,13 +1,28 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/XanderDwyl/scoreleague/api/app/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
+type playerInfo struct {
+	ID        int64
+	Name      string
+	TeamID    int64
+	Status    string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time
+	Team      models.Teams
+}
+
 // GetPlayers ...
 func GetPlayers(c *gin.Context) {
 	var player models.Players
+	// var team models.Teams
+
 	playerErr := c.BindJSON(&player)
 	if playerErr != nil {
 		OutputJSON(c, "error", "Team is not specified")

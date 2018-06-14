@@ -1,23 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, List, Tabs, Avatar, Form, Icon, Input, Button, Checkbox } from 'antd';
+import { List, Tabs, Form } from 'antd';
 import RegisterButton from 'containers/Teams/register';
 import './index.scss';
 
-const { Header, Sider, Content, Footer } = Layout;
 const { TabPane } = Tabs;
-const { SubMenu } = Menu;
-const FormItem = Form.Item;
 
 const TeamList = (params) => {
-  const { form: { getFieldDecorator }, submitHandler, props: { teamList, isCreating } } = params;
+  const { props: { teamList, isCreating } } = params;
   return (
   <div className="team-list">
     <Tabs tabBarExtraContent={<RegisterButton isCreating={isCreating} {...params.props} />}>
       <TabPane tab={'Registered Teams'} key="1">
         <List
-          className="demoloadmorelist"
           loading={false}
           itemLayout="horizontal"
           loadMore={false}

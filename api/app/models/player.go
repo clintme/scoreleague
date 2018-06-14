@@ -16,6 +16,18 @@ type Players struct {
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
 
+// PlayerWithTeam ...
+type PlayerWithTeam struct {
+	ID        int64      `json:"id"`
+	Name      string     `json:"name,omitempty"`
+	TeamID    int64      `json:"team_id,omitempty"`
+	Status    string     `json:"status,omitempty"`
+	TeamName  string     `json:"team_name,omitempty"`
+	CreatedAt time.Time  `json:"created_at,omitempty"`
+	UpdatedAt time.Time  `json:"updated_at,omitempty"`
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+}
+
 // PlayerTable ...
 type PlayerTable struct{}
 
@@ -51,14 +63,16 @@ func (repo *PlayerTable) GetPlayerByName(name string) (Players, error) {
 }
 
 // GetPlayers ...
-func GetPlayers(TeamID int64) ([]Players, error) {
-	var players []Players
+func GetPlayers(TeamID int64) ([]PlayerWithTeam, error) {
+	// var players []Players
+	var playerWithTeam []PlayerWithTeam
 	var err error
 
-	err = db.Debug().Model(&Players{}).Order("created_at desc").Scan(&players).Error
 	if TeamID > 0 {
-		err = db.Debug().Model(&Players{}).Where("team_id=?", TeamID).Scan(&players).Error
+		err = db.Debug().Model(&Players{}).Where("team_id=?", TeamID).Scan(&playerWithTeam).Error
+	} else {
+		err = db.Debug().Table("players").Select("players.id, players.name, players.team_id, players.status, teams.name as team_name").Joins("LEFT JOIN teams ON teams.id = players.team_id").Scan(&playerWithTeam).Error
 	}
 
-	return players, err
+	return playerWithTeam, err
 }

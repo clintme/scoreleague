@@ -20,10 +20,10 @@ const PlayerList = (params) => {
             dataSource={playersList.size && playersList.sort((a, b) => a.get('id') < b.get('id')).toJSON()}
             renderItem={
               item => (
-                <List.Item actions={[<a href={`/players/${item.id}`}>edit</a>]}>
+                <List.Item>
                   <List.Item.Meta
                     title={item.name}
-                    description={`Registered: ${item.created_at}`}
+                    description='Position'
                   />
                 </List.Item>
               )
