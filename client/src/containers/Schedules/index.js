@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { push } from 'react-router-redux';
-import { Route } from 'react-router'
-import { Redirect } from 'react-router-dom'
-import { Form, List, Tabs, Avatar, Icon, Input, Checkbox, Modal, Button } from 'antd';
-
-import Schedules from 'components/Schedules';
 import { duckRequest } from 'ducks';
+import Schedules from 'components/Schedules';
 
 class ScheduleContainer extends Component {
-
   componentDidMount() {
-    this.props.fetch();
+    this.props.fetch({ID: 0});
   }
 
   render() {
@@ -23,12 +16,12 @@ class ScheduleContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  teamList: state.team.get('teamList'),
-  isCreating: state.team.get('isCreating'),
+  matchList: state.schedule.get('matchList'),
+  isCreating: state.schedule.get('isCreating'),
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetch: params => dispatch(duckRequest('GET_TEAM_REQUEST', params)),
+  fetch: params => dispatch(duckRequest('GET_MATCH_SCHED_REQUEST', params)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleContainer);

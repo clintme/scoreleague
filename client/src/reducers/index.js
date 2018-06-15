@@ -5,13 +5,14 @@ import { routerReducer as routing } from 'react-router-redux';
 import auth from 'reducers/auth';
 import team from 'reducers/team';
 import player from 'reducers/player';
+import schedule from 'reducers/schedule';
 
 const rootReducer = combineReducers({
   auth,
   team,
   player,
   routing,
-  // form,
+  schedule,
 });
 
 export default rootReducer;

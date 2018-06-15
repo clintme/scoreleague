@@ -64,7 +64,6 @@ func (repo *PlayerTable) GetPlayerByName(name string) (Players, error) {
 
 // GetPlayers ...
 func GetPlayers(TeamID int64) ([]PlayerWithTeam, error) {
-	// var players []Players
 	var playerWithTeam []PlayerWithTeam
 	var err error
 

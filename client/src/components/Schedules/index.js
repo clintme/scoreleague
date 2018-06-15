@@ -1,39 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Tabs, Avatar, Form, Icon, Input, Button, Checkbox } from 'antd';
-import RegisterButton from 'containers/Schedules/register';
+import { Card, Col, Row, Tabs, Avatar, Form, Icon, Badge } from 'antd';
 import './index.css';
+import profile from 'media/id.png';
 
 const { TabPane } = Tabs;
-const FormItem = Form.Item;
-
+const { Meta } = Card;
+const MatchTeam = ({ match }) => (
+  match.map(item => <div key={item}>{item}</div>)
+)
 const ScheduleList = (params) => {
-  const { form: { getFieldDecorator }, submitHandler, props: { playersList, isCreating, teamInfo } } = params;
+  const { props: { matchList, isCreating } } = params;
 
-  if (!teamInfo) {
+  if (isCreating) {
     return <div></div>;
   }
 
   return (
-  <div className="players-list">
-    <Tabs tabBarExtraContent={<RegisterButton {...params.props} />}>
-      <TabPane tab={`Team ${teamInfo.get('name')} Players`} key="1">
-        <List
-          loading={false}
-          itemLayout="horizontal"
-          loadMore={false}
-          dataSource={playersList.size && playersList.sort((a, b) => a.get('id') < b.get('id')).toJSON()}
-          renderItem={
-            item => (
-              <List.Item actions={[<a href={`/players/${item.id}`}>edit</a>]}>
-                <List.Item.Meta
-                  title={item.name}
-                  description={`Registered: ${item.created_at}`}
-                />
-              </List.Item>
-            )
+  <div id="schedule-list">
+    <Tabs>
+      <TabPane tab={`Game Schedule`} key="1">
+        <Row gutter={24}>
+          {
+            matchList.map(item => (
+              <Col key={item.get('id')} span={6} style={{marginBottom: '20px'}}>
+                <Card
+                  style={{ width: 300 }}
+                    actions={[<Icon type="setting" />, <Icon type="caret-right" />]}
+                >
+                  <Meta
+                    title={item.get('schedule')}
+                    description={item.get('schedule')}
+                  />
+                  <MatchTeam match={item.get('match')} />
+                </Card>
+              </Col>
+            ))
           }
-        />
+        </Row>
       </TabPane>
     </Tabs>
   </div>

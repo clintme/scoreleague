@@ -1,5 +1,5 @@
 import { List, fromJS } from 'immutable';
-import { addItemSelector } from 'selectors/app';
+import { addItemSelector } from 'selectors';
 
 const initialState = fromJS({
   isFetching: false,
