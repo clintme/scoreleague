@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 // Schedules ....
 type Schedules struct {
@@ -20,6 +22,31 @@ type MatchSchedule struct {
 	ScheduledDate time.Time `json:"scheduled_date,omitempty"`
 	Name          string    `json:"name,omitempty"`
 	Status        int64     `json:"status"`
+}
+
+// ScheduleTable ...
+type ScheduleTable struct{}
+
+// Create ...
+func (schedule *Schedules) Create() (Schedules, error) {
+	if schedule.ID == 0 {
+		var err error
+
+		// scheduleData := ScheduleTable{}
+		// schedules, err := scheduleData.GetScheduleByName(schedule.Name)
+		// if err == nil && schedules.ID > 0 {
+		// 	return *schedule, errors.New("Schedule only allowed to play in one team")
+		// }
+
+		err = db.Debug().Create(schedule).Error
+		if err != nil {
+			schedule.ID = 0
+		}
+
+		return *schedule, err
+	}
+
+	return *schedule, nil
 }
 
 // GetMatchSchedules ...

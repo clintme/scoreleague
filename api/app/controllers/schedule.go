@@ -25,22 +25,22 @@ func GetMatchSchedules(c *gin.Context) {
 	OutputDataJSON(c, "success", "Matches", gin.H{"data": matchSchedule})
 }
 
-// // PlayerRegistration ...
-// func PlayerRegistration(c *gin.Context) {
-// 	var player models.Players
+// AddSchedule ...
+func AddSchedule(c *gin.Context) {
+	var schedule models.Schedules
 
-// 	err := c.BindJSON(&player)
-// 	if err != nil {
-// 		OutputJSON(c, "error", err.Error())
-// 		return
-// 	}
+	err := c.BindJSON(&schedule)
+	if err != nil {
+		OutputJSON(c, "error", err.Error())
+		return
+	}
 
-// 	player, err = player.Create()
-// 	if err != nil {
-// 		OutputJSON(c, "error", err.Error())
-// 		return
-// 	}
+	schedule, err = schedule.Create()
+	if err != nil {
+		OutputJSON(c, "error", err.Error())
+		return
+	}
 
-// 	OutputDataJSON(c, "success", "Player is successfully registered", gin.H{"data": player})
+	OutputDataJSON(c, "success", "Schedule is successfully added", gin.H{"data": schedule})
 
-// }
+}
