@@ -43,6 +43,7 @@ const matchScheduleSelector =(item) => {
       curr[next.id] = {
         id: next.id,
         schedule: next.scheduled_date,
+        status: next.status,
         match: [],
       }
     }

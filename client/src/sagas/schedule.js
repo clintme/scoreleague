@@ -8,6 +8,7 @@ import * as scheduleAPI from 'helpers/API/schedule';
 export function* matchSchedule(params) {
   try {
     const res = yield scheduleAPI.getMatchSchedules(params);
+    console.log(res)
     if (res.status === 'success') {
       yield put(duckSuccess('GET_MATCH_SCHED_SUCCESS', { ...res.data}));
     } else {

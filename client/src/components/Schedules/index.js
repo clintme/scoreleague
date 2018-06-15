@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Card, Col, Row, Tabs, Avatar, Form, Icon, Badge } from 'antd';
+import Moment from 'react-moment';
+import { Card, Col, Row, Tabs, Form, Icon } from 'antd';
 import './index.css';
 import profile from 'media/id.png';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
 const MatchTeam = ({ match }) => (
-  match.map(item => <div key={item}>{item}</div>)
+  match.map(item => <span key={item}>{item}</span>)
 )
 const ScheduleList = (params) => {
   const { props: { matchList, isCreating } } = params;
@@ -26,13 +26,15 @@ const ScheduleList = (params) => {
               <Col key={item.get('id')} span={6} style={{marginBottom: '20px'}}>
                 <Card
                   style={{ width: 300 }}
-                    actions={[<Icon type="setting" />, <Icon type="caret-right" />]}
+                    actions={item.get('status') === 0 ?
+                      [<Icon type="setting" />, <Icon type="caret-right" />] :
+                      [<Icon type="setting" />, <span>Done</span>]
+                    }
                 >
                   <Meta
-                    title={item.get('schedule')}
-                    description={item.get('schedule')}
+                      title={<Moment format="LLL">{item.get('schedule')}</Moment>}                  
+                    description={<MatchTeam match={item.get('match')} />}
                   />
-                  <MatchTeam match={item.get('match')} />
                 </Card>
               </Col>
             ))

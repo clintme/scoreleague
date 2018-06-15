@@ -2,3 +2,25 @@
 .players-list .ant-row {
   margin: 0 !important;
 }
+
+#schedule-list .ant-card-meta-title {
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  padding: 10px;
+}
+
+#schedule-list .ant-card-meta-description {
+  height: 100px;
+}
+
+#schedule-list .ant-card-meta-description > span {
+  border: 1px solid #92a5b6;
+  display: inline-block;
+  width: 114px;
+  height: 95%;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 7;
+  border-radius: 10px;
+  margin: 5px 5px 0;
+}
