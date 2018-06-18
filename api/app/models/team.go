@@ -43,6 +43,21 @@ func (team *Teams) Create() (Teams, error) {
 	return *team, nil
 }
 
+// Update ...
+func (team *Teams) Update(ID int64) (Teams, error) {
+	err := db.Debug().Model(&team).Where("id = ?", ID).Updates(Teams{
+		Name:    team.Name,
+		Captain: team.Captain,
+		Payment: team.Payment,
+		Status:  team.Status,
+	}).Error
+	if err != nil {
+		return *team, errors.New("Error encounter while updating team entry")
+	}
+
+	return *team, err
+}
+
 // GetTeamByName ...
 func (repo *TeamTable) GetTeamByName(name string) (Teams, error) {
 	var teams Teams

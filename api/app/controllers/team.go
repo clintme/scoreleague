@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"strconv"
+
 	"github.com/XanderDwyl/scoreleague/api/app/models"
 	"gopkg.in/gin-gonic/gin.v1"
 )
@@ -44,4 +46,30 @@ func TeamRegistration(c *gin.Context) {
 	}
 
 	OutputDataJSON(c, "success", "Team Created", gin.H{"data": team})
+}
+
+// EditTeam ...
+func EditTeam(c *gin.Context) {
+	var team models.Teams
+	ID := c.Param("id")
+
+	err := c.BindJSON(&team)
+	if err != nil {
+		OutputJSON(c, "error", err.Error())
+		return
+	}
+
+	teamID, err := strconv.ParseInt(ID, 10, 64)
+	if err != nil {
+		OutputJSON(c, "error", "there is a problem with the team ID. please check it again.")
+		return
+	}
+
+	team, err = team.Update(teamID)
+	if err != nil {
+		OutputJSON(c, "error", err.Error())
+		return
+	}
+
+	OutputDataJSON(c, "success", "Team is successfully edited", gin.H{"data": team})
 }
