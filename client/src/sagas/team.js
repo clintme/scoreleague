@@ -39,6 +39,38 @@ export function* createTeamSuccess() {
   }
 }
 
+export function* updateTeam(params) {
+  try {
+    const res = yield teamAPI.update(params);
+    const { data: { team } } = res;
+    if (res.status === 'success') {
+      yield put(duckSuccess('TEAM_UPDATE_SUCCESS', { ...team }));
+      yield call(message.success('Team is successfully updated.'));
+    } else {
+      message.error(res.message);
+      yield put(duckFailed('TEAM_UPDATE_FAILED', res.message));
+    }
+  } catch (error) {
+    message.error(error.message);
+    yield put(duckFailed('TEAM_UPDATE_FAILED', error));
+  }
+}
+export function* updateTeamRequest() {
+  while (true) {
+    const action = yield take('TEAM_UPDATE_REQUEST');
+    
+    yield call(updateTeam, action.payload);
+  }
+}
+export function* updateTeamSuccess() {
+  while (true) {
+    yield take('TEAM_UPDATE_SUCCESS');
+    
+    yield put(push('/team'));
+    yield put(go(0));
+  }
+}
+
 export function* getTeam(params) {
   try {
     const res = yield teamAPI.registeredTeam(params || { ID: 0 });

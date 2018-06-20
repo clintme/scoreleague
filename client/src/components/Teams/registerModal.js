@@ -8,7 +8,7 @@ const { Item } = Form;
 
 const TeamRegistration = (props) => {
 
-  const { form: { getFieldDecorator }, submitHandler, props: { isCreating } } = props
+  const { form: { getFieldDecorator }, submitHandler } = props
 
   return (
   <div className="team-registration">

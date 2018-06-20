@@ -5,6 +5,39 @@ import 'components/App/index.css';
 
 const { Header, Sider, Content, Footer } = Layout;
 
+const MainLayout = ({ state, props, toggle }) => (
+  <Layout style={{ height: "100vh" }}>
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={state.collapsed}
+    >
+      <div className="logo" />
+      <SideMenu location={props.history.location} />
+    </Sider>
+    <Layout>
+      <Header style={{ background: '#fff', padding: 0 }}>
+        <Icon
+          className="trigger"
+          type={state.collapsed ? 'menu-unfold' : 'menu-fold'}
+          onClick={toggle}
+        />
+      </Header>
+      <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+        {props.children}
+      </Content>
+    </Layout>
+  </Layout>
+);
+
+const GamePlayedLayout = ({ state, props, toggle }) => (
+  <Layout style={{ height: "100vh" }}>
+    <Content style={{ margin: '5px', padding: 24, background: '#fff', minHeight: 280 }}>
+      {props.children}
+    </Content>
+  </Layout>
+);
+
 class AppLayout extends Component {
   state = {
     collapsed: false,
@@ -15,34 +48,12 @@ class AppLayout extends Component {
     });
   }
   render() {
-    console.log(this.props.path)
-    return (
-      <Layout style={{ height: "100vh" }}>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={this.state.collapsed}
-        >
-          <div className="logo" />
-          <SideMenu />
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className="trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
-          </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            {this.props.children}
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            ScoreLeague.com ©2018 Created by XanderDwyl
-          </Footer>
-        </Layout>
-      </Layout>
-    );
+    const { pathname } = this.props.history.location;
+    if (pathname === '/game_played') {
+      return <GamePlayedLayout {...this} />;
+    }
+
+    return <MainLayout {...this} />;
   }
 };
 

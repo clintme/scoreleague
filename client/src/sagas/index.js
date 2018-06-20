@@ -9,6 +9,8 @@ export default function* rootSaga() {
   yield fork(authSaga.loginRequest);
   yield fork(teamSaga.createTeamRequest);
   yield fork(teamSaga.createTeamSuccess);
+  yield fork(teamSaga.updateTeamRequest);
+  yield fork(teamSaga.updateTeamSuccess);
   yield fork(teamSaga.getTeamRequest);
   yield fork(teamSaga.getTeamInfoRequest);
   yield fork(playerSaga.addPlayerRequest);

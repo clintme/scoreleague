@@ -11,3 +11,7 @@
   cursor: pointer;
   transition: color .3s;
 }
+
+.ant-layout-content {
+  overflow: auto;
+}

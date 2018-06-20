@@ -1,15 +1,16 @@
-import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'react-router-redux';
 import { applyMiddleware, createStore } from 'redux';
 
-import Saga from '../sagas';
-import reducer from '../reducers';
+// import createHistory from 'history/createBrowserHistory';
+import Saga from 'sagas';
+import history from 'store/history';
+import reducer from 'reducers';
 
 export default function configureStore(preloadedState) {
   // create middlewares
-  const history = createHistory();
+  // const history = createHistory();
   const logger = createLogger();
   const sagaMiddleware = createSagaMiddleware();
 

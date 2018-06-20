@@ -20,7 +20,7 @@ const PlayerList = (params) => {
                   style={{ width: 300 }}
                   actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                 >
-                  <Badge count={item.get('id')} className={`badge-${item.get('team_name').toLowerCase()}`}></Badge>
+                  <Badge count={item.get('id')} className={item.get('team_name') && `badge-${item.get('team_name').toLowerCase()}`}></Badge>
                   <Meta
                     avatar={<Avatar src={profile} />}
                     title={item.get('name')}

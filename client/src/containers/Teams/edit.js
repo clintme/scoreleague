@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router'
-import { Redirect } from 'react-router-dom'
-import { Form, List, Tabs, Avatar, Icon, Input, Checkbox, Modal, Button } from 'antd';
-
 import TeamEdit from 'components/Teams/edit';
 import { duckRequest } from 'ducks';
 
-class PlayersContainer extends Component {
+class TeamUpdateContainer extends Component {
 
   componentDidMount() {
     const {
@@ -37,6 +32,23 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetch: teamID => dispatch(duckRequest('GET_PLAYERS_REQUEST', teamID)),
   fetchTeamInfo: ID => dispatch(duckRequest('TEAM_INFO_REQUEST', { ID })),
+  submitHandler: (e, form, id) => {
+    e.preventDefault();
+
+    form.validateFields((err, params) => {
+      if (!err) {
+        const fields = {
+          Name: params.Name,
+          Description: params.Description,
+          Captain: params.Captain,
+          Payment: parseInt(params.Payment, 10) || 0,
+          Id: parseInt(id, 10),
+        };
+
+        dispatch(duckRequest('TEAM_UPDATE_REQUEST', fields))
+      }
+    });
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayersContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamUpdateContainer);

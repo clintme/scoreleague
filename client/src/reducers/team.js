@@ -63,6 +63,24 @@ const team = (state = initialState, action) => {
         isCreating: false,
       });
       return state;
+    case 'TEAM_UPDATE_REQUEST':
+      state = state.merge({
+        isCreating: true,
+      });
+      return state;
+    case 'TEAM_UPDATE_SUCCESS':
+      state = state.merge({
+        isCreating: false,
+      });
+
+      state = addItemSelector(state, ['teamList'], action.payload.data);
+
+      return state;
+    case 'TEAM_UPDATE_FAILED':
+      state = state.merge({
+        isCreating: false,
+      });
+      return state;
     default:
       return state;
   }

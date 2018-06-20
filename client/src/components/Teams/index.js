@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { List, Tabs, Form } from 'antd';
+import { List, Tabs } from 'antd';
 import RegisterButton from 'containers/Teams/register';
 import './index.scss';
 
@@ -34,4 +33,4 @@ const TeamList = (params) => {
   </div>
 )};
 
-export default Form.create()(TeamList);
+export default TeamList;

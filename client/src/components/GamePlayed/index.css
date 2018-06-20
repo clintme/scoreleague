@@ -1,0 +1,25 @@
+#game-played .ant-col-11 {
+  border: 1px solid #dedede;
+  background-color: #dedede;
+  text-align: center;
+  border-radius: 50px;
+}
+#game-played .host > .title,
+#game-played .guest > .title {
+  font-size: 50px;
+  padding: 10px 0;
+  border-bottom: 1px solid #cececd;
+  background: #cececd;
+  border-radius: 50px 50px 0 0;
+  color: #008000;
+}
+
+#game-played .host > .score,
+#game-played .guest > .score {
+  text-align: center;
+  font-size: 650px;
+  font-weight: bold;
+  font-family: unset;
+  color: #000000;
+  line-height: 1;
+}

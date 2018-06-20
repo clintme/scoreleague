@@ -71,5 +71,7 @@ func EditTeam(c *gin.Context) {
 		return
 	}
 
-	OutputDataJSON(c, "success", "Team is successfully edited", gin.H{"data": team})
+	team.ID = teamID
+
+	OutputDataJSON(c, "success", "Team is successfully edited", gin.H{"team": team})
 }

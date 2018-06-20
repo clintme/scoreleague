@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/XanderDwyl/scoreleague/api/app/config"
-	"github.com/XanderDwyl/scoreleague/api/app/controllers"
 	"github.com/XanderDwyl/scoreleague/api/app/models"
 	jwt "github.com/dgrijalva/jwt-go"
 
@@ -70,11 +69,11 @@ func APIAuth() gin.HandlerFunc {
 			return
 		}
 
-		if user.UserID == 0 || user.Username == "" {
-			controllers.OutputErrorJSON(c, "User not found")
-			c.Abort()
-			return
-		}
+		// if user.UserID == 0 || user.Username == "" {
+		// 	controllers.OutputErrorJSON(c, "User not found")
+		// 	c.Abort()
+		// 	return
+		// }
 
 		c.Set("is_login", true)
 		c.Set("access_token", user.AccessToken)
