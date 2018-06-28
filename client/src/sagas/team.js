@@ -1,7 +1,7 @@
 import React from 'react';
 import { message } from 'antd';
 import { Seq } from 'immutable';
-import { push, go } from 'react-router-redux';
+import { push } from 'connected-react-router'
 import { call, put, take } from 'redux-saga/effects';
 import { duckSuccess, duckFailed } from 'ducks';
 import * as teamAPI from 'helpers/API/team';
@@ -45,7 +45,6 @@ export function* updateTeam(params) {
     const { data: { team } } = res;
     if (res.status === 'success') {
       yield put(duckSuccess('TEAM_UPDATE_SUCCESS', { ...team }));
-      yield call(message.success('Team is successfully updated.'));
     } else {
       message.error(res.message);
       yield put(duckFailed('TEAM_UPDATE_FAILED', res.message));
@@ -67,7 +66,7 @@ export function* updateTeamSuccess() {
     yield take('TEAM_UPDATE_SUCCESS');
     
     yield put(push('/team'));
-    yield put(go(0));
+    yield call(message.success('Team is successfully updated.'));
   }
 }
 

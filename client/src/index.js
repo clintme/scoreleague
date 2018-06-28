@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
 
 import './index.css';
 import Routes from 'routes';
@@ -17,11 +18,13 @@ const history = configureStore().history;
 const docRoot = document.getElementById('root');
 const AppRoute = () => (
   <BrowserRouter>
-    <AppLayout history={history} store={store}>
-      <Provider store={store}>
-        <Routes history={history} />
-      </Provider>
-    </AppLayout>
+  <Provider store={store}>
+    <ConnectedRouter history={history} store={store}>
+      <AppLayout history={history}>
+        <Routes />
+      </AppLayout>
+    </ConnectedRouter>
+  </Provider>
   </BrowserRouter>
 );
 
