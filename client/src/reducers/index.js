@@ -6,6 +6,7 @@ import auth from 'reducers/auth';
 import team from 'reducers/team';
 import player from 'reducers/player';
 import schedule from 'reducers/schedule';
+import game from 'reducers/game';
 
 const rootReducer = combineReducers({
   auth,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   player,
   routing,
   schedule,
+  game,
 });
 
 export default rootReducer;

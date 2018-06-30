@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { List, Tabs } from 'antd';
 import RegisterButton from 'containers/Teams/register';
-import './index.scss';
+import './index.css';
 
 const { TabPane } = Tabs;
 

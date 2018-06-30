@@ -1,6 +1,4 @@
-import React from 'react';
 import { message } from 'antd';
-import { Seq } from 'immutable';
 import { push } from 'connected-react-router'
 import { call, put, take } from 'redux-saga/effects';
 import { duckSuccess, duckFailed } from 'ducks';
@@ -32,19 +30,18 @@ export function* createTeamSuccess() {
   while (true) {
     const action = yield take('TREG_SUCCESS');
     
-    // yield put(push(`/team/${action.payload.data.id}/players`));
-    // yield put(go(0));
-
+    yield put(push(`/team/${action.payload.data.id}/players`));
     message.success('Team is successfully registered.');
   }
 }
 
-export function* updateTeam(params) {
+export function* updateTeam(payload) {
   try {
-    const res = yield teamAPI.update(params);
+    const res = yield teamAPI.update(payload);
     const { data: { team } } = res;
     if (res.status === 'success') {
       yield put(duckSuccess('TEAM_UPDATE_SUCCESS', { ...team }));
+      yield call(message.success('Team is successfully updated.'));
     } else {
       message.error(res.message);
       yield put(duckFailed('TEAM_UPDATE_FAILED', res.message));
@@ -64,9 +61,7 @@ export function* updateTeamRequest() {
 export function* updateTeamSuccess() {
   while (true) {
     yield take('TEAM_UPDATE_SUCCESS');
-    
     yield put(push('/team'));
-    yield call(message.success('Team is successfully updated.'));
   }
 }
 

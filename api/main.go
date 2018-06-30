@@ -58,13 +58,14 @@ func initializeRoutes(origRouter *gin.Engine) {
 	api := origRouter.Group("")
 
 	api.GET("/", controllers.Index)
+	api.POST("/signup", controllers.Signup)
 	api.POST("/login", controllers.Login)
 	api.POST("/teams", controllers.GetTeam)
 	api.POST("/teams/edit/:id", controllers.EditTeam)
 	api.POST("/teams/registration", controllers.TeamRegistration)
 	api.POST("/players", controllers.GetPlayers)
+	api.POST("/players/registration", controllers.PlayerRegistration)
 	api.POST("/schedules", controllers.GetMatchSchedules)
 	api.POST("/schedules/add", controllers.AddSchedule)
-	api.POST("/players/registration", controllers.PlayerRegistration)
-	api.POST("/signup", controllers.Signup)
+	api.POST("/games", controllers.GetGames)
 }

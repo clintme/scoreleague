@@ -15,8 +15,7 @@ export default function configureStore(preloadedState) {
   const sagaMiddleware = createSagaMiddleware();
 
   const middleware = applyMiddleware(
-    logger,
-    routerMiddleware(history),
+    logger,routerMiddleware(history),
     sagaMiddleware
   );
 

@@ -14,7 +14,6 @@ func GetTeam(c *gin.Context) {
 	var err error
 
 	teamErr := c.BindJSON(&team)
-
 	if teamErr == nil {
 		teams, err = models.GetTeams(team.ID)
 	} else {

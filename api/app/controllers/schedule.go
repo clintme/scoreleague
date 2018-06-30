@@ -8,15 +8,13 @@ import (
 // GetMatchSchedules ...
 func GetMatchSchedules(c *gin.Context) {
 	var schedule models.Schedules
-	// var team models.Teams
-
+	var scheduleID int64
 	scheduleErr := c.BindJSON(&schedule)
-	if scheduleErr != nil {
-		OutputJSON(c, "error", "Schedule is not specified")
-		return
+	if scheduleErr == nil {
+		scheduleID = schedule.ID
 	}
 
-	matchSchedule, err := models.GetMatchSchedules(schedule.ID)
+	matchSchedule, err := models.GetMatchSchedules(scheduleID)
 	if err != nil {
 		OutputJSON(c, "error", err.Error())
 		return

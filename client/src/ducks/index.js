@@ -21,8 +21,11 @@ const loggedInPayload = payload => ({
  * @param { params } `Object` it is optional.
  * return { ...req } will take action for request.
  */
-export function duckRequest(actionType, params) {
-  const req = { type: actionType };
+export function duckRequest(actionType, params, historyPush) {
+  const req = {
+    type: actionType,
+    push: historyPush
+  };
 
   if (params) { req.payload = params; }
 

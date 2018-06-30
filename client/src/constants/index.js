@@ -9,5 +9,3 @@ export function getLocale(query) {
 
   return locale;
 }
-
-export function test() {}

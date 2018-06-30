@@ -1,16 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { List, Tabs, Avatar, Form, Icon, Input, Button, Checkbox } from 'antd';
+import { List, Tabs, Form, Modal, Button } from 'antd';
 import RegisterButton from 'containers/Players/register';
 import './index.css';
 
 const { TabPane } = Tabs;
-const FormItem = Form.Item;
 
 const PlayerList = (params) => {
-  const { form: { getFieldDecorator }, submitHandler, props: { playersList, isCreating, teamInfo } } = params;
+  const { props: { playersList, teamInfo } } = params;
   return (
-  <div className="players-list">
+    <Modal
+      width="80%"
+      className="edit-team-modal"
+      title="Edit Team Info"
+      visible={true}
+      style={{ top: 10, height: "100vh" }}
+      maskClosable={false}
+      // onOk={props.handleOk}
+      // onCancel={props.handleCancel}
+      footer={[
+        // <Button key="back" onClick={props.handleCancel}>Close</Button>,
+        // onClick = {(e) => submitHandler(e, params.form, teamInfo.get('id'))}
+        <Button key="submit" htmlType="submit" type="primary">
+          Update
+        </Button>,
+      ]}
+    >
       <Tabs tabBarExtraContent={<RegisterButton {...params.props} />}>
         <TabPane tab={`Team ${teamInfo.get('name')} Players`} key="1">
           <List
@@ -30,8 +44,8 @@ const PlayerList = (params) => {
             }
           />
         </TabPane>
-    </Tabs>
-  </div>
+      </Tabs>
+    </Modal>
 )};
 
 export default Form.create()(PlayerList);

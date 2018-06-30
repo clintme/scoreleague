@@ -12,7 +12,7 @@ func GetPlayers(c *gin.Context) {
 
 	playerErr := c.BindJSON(&player)
 	if playerErr != nil {
-		OutputJSON(c, "error", "Team is not specified")
+		OutputJSON(c, "error", "Players is not specified")
 		return
 	}
 

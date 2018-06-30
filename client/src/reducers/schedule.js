@@ -19,7 +19,7 @@ const schedule = (state = initialState, action) => {
     case 'GET_MATCH_SCHED_SUCCESS':
       state = state.merge({
         isFetching: false,
-        matchList: matchScheduleDataSelector(action.payload.data)
+        matchList: action.payload.data
       });
       return state;
     case 'GET_MATCH_SCHED_FAILED':

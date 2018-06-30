@@ -1,14 +1,27 @@
 import React from 'react';
-import { Card, Form, Input, Icon, Button } from 'antd';
-import './index.scss';
+import { Card, Form, Input, Icon, Button, Modal } from 'antd';
+import './index.css';
 
 const { Item } = Form;
 
 const TeamUpdateForm = (params) => {
-  const { form: { getFieldDecorator }, props: { teamInfo, submitHandler } } = params
-
+  const { form: { getFieldDecorator }, props: { teamInfo, submitHandler, history: { push } } } = params
+  
   return (
-    <Card className="team-list" title="Edit Teams" bordered={false} style={{ width: '100%' }}>    
+    <Modal
+      // width="100%"
+      className="edit-team-modal"
+      title="Edit Team Info"
+      visible={true}
+      // onOk={props.handleOk}
+      // onCancel={props.handleCancel}
+      footer={[
+        // <Button key="back" onClick={props.handleCancel}>Close</Button>,
+        <Button key="submit" htmlType="submit" type="primary" onClick={(e) => submitHandler(e, params.form, teamInfo.get('id'), push)}>
+          Update
+        </Button>,
+      ]}
+    >
       <Item>
         {getFieldDecorator('Name', { initialValue: teamInfo.get('name') }, {
           rules: [{ required: true, message: 'Team name is required!' }],
@@ -33,11 +46,7 @@ const TeamUpdateForm = (params) => {
           <Input prefix={<Icon type="pay-circle-o" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Payment" />
         )}
       </Item>
-
-      <Button key="submit" htmlType="submit" type="primary" onClick={(e) => submitHandler(e, params.form, teamInfo.get('id'))}>
-        Update
-      </Button>
-    </Card>
+    </Modal>
 )};
 
 export default Form.create()(TeamUpdateForm);

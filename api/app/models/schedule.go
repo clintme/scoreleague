@@ -20,8 +20,11 @@ type Schedules struct {
 type MatchSchedule struct {
 	ID            int64     `json:"id,omitempty"`
 	ScheduledDate time.Time `json:"scheduled_date,omitempty"`
-	Name          string    `json:"name,omitempty"`
+	Host          string    `json:"host,omitempty"`
+	Guest         string    `json:"guest,omitempty"`
 	Status        int64     `json:"status"`
+	SetNo         int64     `json:"set_no"`
+	GameStatus    int64     `json:"game_status"`
 }
 
 // ScheduleTable ...
@@ -55,9 +58,9 @@ func GetMatchSchedules(ID int64) ([]MatchSchedule, error) {
 	var err error
 
 	if ID > 0 {
-		err = db.Debug().Table("schedules").Select("schedules.id, schedules.scheduled_date, teams.name, schedules.status").Joins("LEFT JOIN teams ON teams.id = schedules.host_id or teams.id = schedules.guest_id").Where("id=?", ID).Scan(&matchSchedule).Error
+		err = db.Debug().Table("schedules").Select("schedules.id, schedules.scheduled_date, (select name from teams where id=schedules.host_id) as host, (select name from teams where id=schedules.guest_id) as guest, schedules.status").Joins("LEFT JOIN teams ON teams.id = schedules.host_id or teams.id = schedules.guest_id").Where("schedules.id=?", ID).Scan(&matchSchedule).Error
 	} else {
-		err = db.Debug().Table("schedules").Select("schedules.id, schedules.scheduled_date, teams.name, schedules.status").Joins("LEFT JOIN teams ON teams.id = schedules.host_id or teams.id = schedules.guest_id").Scan(&matchSchedule).Error
+		err = db.Debug().Table("schedules").Select("schedules.id, schedules.scheduled_date, (select name from teams where id=schedules.host_id) as host, (select name from teams where id=schedules.guest_id) as guest, schedules.status").Joins("LEFT JOIN teams ON teams.id = schedules.id").Scan(&matchSchedule).Error
 	}
 
 	return matchSchedule, err

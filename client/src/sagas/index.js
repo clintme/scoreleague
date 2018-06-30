@@ -4,6 +4,7 @@ import * as authSaga from 'sagas/auth';
 import * as teamSaga from 'sagas/team';
 import * as playerSaga from 'sagas/player';
 import * as scheduleSaga from 'sagas/schedule';
+import * as gameSaga from 'sagas/game';
 
 export default function* rootSaga() {
   yield fork(authSaga.loginRequest);
@@ -16,4 +17,5 @@ export default function* rootSaga() {
   yield fork(playerSaga.addPlayerRequest);
   yield fork(playerSaga.getPlayerRequest);
   yield fork(scheduleSaga.getMatchSchedRequest);
+  yield fork(gameSaga.getMatchGameRequest);
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Modal, Input, Icon, Button } from 'antd';
 
-import './index.scss';
+import './index.css';
 
 const { Item } = Form;
 
@@ -22,7 +22,7 @@ const TeamRegistration = (props) => {
       footer={[
         <Button key="back" onClick={props.handleCancel}>Close</Button>,
         <Button key="submit" htmlType="submit" type="primary" onClick={(e) => submitHandler(e, props.form)}>
-          Register
+          Start Game
         </Button>,
       ]}
     >

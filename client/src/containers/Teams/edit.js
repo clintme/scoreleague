@@ -12,11 +12,13 @@ class TeamUpdateContainer extends Component {
       }
     } = this.props;
 
+    console.log(teamID)
     this.props.fetch(teamID);
     this.props.fetchTeamInfo(teamID || 0);
   }
 
   render() {
+    console.log(this)
     return (
       <TeamEdit {...this} />
     )
@@ -32,7 +34,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetch: teamID => dispatch(duckRequest('GET_PLAYERS_REQUEST', teamID)),
   fetchTeamInfo: ID => dispatch(duckRequest('TEAM_INFO_REQUEST', { ID })),
-  submitHandler: (e, form, id) => {
+  submitHandler: (e, form, id, historyPush) => {
     e.preventDefault();
 
     form.validateFields((err, params) => {
@@ -45,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
           Id: parseInt(id, 10),
         };
 
-        dispatch(duckRequest('TEAM_UPDATE_REQUEST', fields))
+        dispatch(duckRequest('TEAM_UPDATE_REQUEST', fields, historyPush))
       }
     });
   }

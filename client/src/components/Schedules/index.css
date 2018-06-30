@@ -9,18 +9,35 @@
   padding: 10px;
 }
 
+#schedule-list .ant-card-body .ant-tabs .ant-tabs-content {
+  max-height: 90vh;
+  height: 160px;
+  padding-top: 5px;
+}
+
 #schedule-list .ant-card-meta-description {
   height: 100px;
 }
 
-#schedule-list .ant-card-meta-description > span {
+#schedule-list .ant-card-meta-description > .match-team > span {
   border: 1px solid #92a5b6;
   display: inline-block;
   width: 114px;
-  height: 95%;
+  height: 95px;
   vertical-align: middle;
   text-align: center;
   line-height: 7;
   border-radius: 10px;
   margin: 5px 5px 0;
+}
+
+#schedule-list .set-no {
+  padding: 12px;
+  border: 1px solid #ff0000;
+  text-align: center;
+  width: 50px;
+  margin: 0 auto 20px;
+  border-radius: 30px;
+  background-color: #ff0000;
+  color: #ffffff;
 }
